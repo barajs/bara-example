@@ -10,14 +10,13 @@
 
 import {register} from 'bara';
 import {useReactApp, useTouchableOpacityStream} from 'bara-react';
-import App from './src/App';
-import {name as appName} from './app.json';
+import App from './App';
 
 // App Features
-import {useWelcome} from './src/features/welcome'
+import {useWelcome} from './features/welcome';
 
 register(() => {
-  useReactApp(appName, App);
+  useReactApp('bara-example', App);
   useTouchableOpacityStream();
-  useWelcome()
+  useWelcome();
 });

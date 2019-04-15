@@ -4,7 +4,7 @@ export function useWelcome() {
   return useTouchableOpacityPress(
     {nameOf: nameOfTouchableOpacity('bara-button')},
     () => {
-      alert('Hello from Bara Button!');
+      console.log('Hello from Bara Button!');
     },
   );
 }
