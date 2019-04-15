@@ -1,0 +1,3 @@
+rootProject.name = 'bara_demo'
+
+include ':app'
