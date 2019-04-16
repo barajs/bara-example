@@ -1,6 +1,6 @@
 # Bara Example App
 
-This app is a simple boilerplate to show that Bara React works on cross-platform.
+Example Bara React app build on cross-platforms: Windows, Linux, MacOS, Web, Android and iOS.
 
 ## How to install
 
@@ -8,19 +8,25 @@ This app is a simple boilerplate to show that Bara React works on cross-platform
 git clone https://github.com/barajs/bara-example.git
 ```
 
+### Install dependencies:
+
 ```
 yarn
-
-# or
-
-npm install
 ```
 
-## How to start dev
+## How to start development
 
+Start dev server for all platforms:
 ```
 yarn dev
 ```
+
+## Repo Workflow
+
+1. Fork this repo to your account or clone directly (if clone you have to run `git remote rm origin` then replace origin with your repository).
+2. Add remote upstream: `git remote add upstream https://github.com/barajs/bara-example.git`
+3. Create new features under `src` directory and `bara.js`
+4. Pull new update from this repo: `git pull upstream master`
 
 ## License
 
