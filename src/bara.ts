@@ -1,15 +1,15 @@
-import {useTouchableOpacityStream} from 'bara-react';
-import {useWelcome} from './features/welcome';
+import { useTouchableOpacityStream } from 'bara-react'
+import { useWelcome } from './features/welcome'
 
 export const useStreams = () => {
-  useTouchableOpacityStream();
-};
+  useTouchableOpacityStream()
+}
 
 export const useTriggers = () => {
-  useWelcome();
-};
+  useWelcome()
+}
 
 export default () => {
-  useStreams();
-  useTriggers();
-};
+  useStreams()
+  useTriggers()
+}

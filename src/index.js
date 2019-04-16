@@ -2,12 +2,12 @@
  * @format
  */
 
-import {register} from 'bara';
-import {useReactApp} from 'bara-react';
-import App from './App';
-import registerBaraFeatures from './bara';
+import { register } from 'bara'
+import { useReactApp } from 'bara-react'
+import App from './App'
+import registerBaraFeatures from './bara'
 
 register(() => {
-  useReactApp({name: 'bara-demo', isNative: false, App});
-  registerBaraFeatures();
-});
+  useReactApp({ name: 'bara-demo', isNative: false, App })
+  registerBaraFeatures()
+})

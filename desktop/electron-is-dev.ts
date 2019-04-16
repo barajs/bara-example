@@ -10,4 +10,3 @@ const getFromEnv =
   parseInt(process.env.ELECTRON_IS_DEV, 10) === 1
 
 export const __DEV__ = isEnvSet ? getFromEnv : !app.isPackaged
-

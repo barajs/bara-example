@@ -9,18 +9,18 @@ import {
   shell,
   TouchBar,
   Tray,
-} from 'electron';
-import Store from 'electron-store';
-import {autoUpdater} from 'electron-updater';
-import path from 'path';
-import url from 'url';
+} from 'electron'
+import Store from 'electron-store'
+import { autoUpdater } from 'electron-updater'
+import path from 'path'
+import url from 'url'
 
-import {__DEV__} from './electron-is-dev';
-import {WindowState, windowStateKeeper} from './electron-window-state';
+import { __DEV__ } from './electron-is-dev'
+import { WindowState, windowStateKeeper } from './electron-window-state'
 
 const FEATURE_FLAGS = {
   LOCK_ON_CENTER: process.platform !== 'linux',
-};
+}
 
 const config = new Store({
   defaults: {
@@ -28,20 +28,20 @@ const config = new Store({
     launchCount: 0,
     lockOnCenter: false,
   },
-});
+})
 
 if (!FEATURE_FLAGS.LOCK_ON_CENTER && config.get('lockOnCenter')) {
-  config.set('lockOnCenter', false);
+  config.set('lockOnCenter', false)
 }
 
-const frameIsDifferentBetweenModes = process.platform !== 'darwin';
+const frameIsDifferentBetweenModes = process.platform !== 'darwin'
 
-const dock: Electron.Dock | null = app.dock || null;
-let mainWindow: Electron.BrowserWindow;
-let tray: Electron.Tray | null = null;
+const dock: Electron.Dock | null = app.dock || null
+let mainWindow: Electron.BrowserWindow
+let tray: Electron.Tray | null = null
 
-let mainWindowState: WindowState;
-let menubarWindowState: WindowState;
+let mainWindowState: WindowState
+let menubarWindowState: WindowState
 
 let updateInfo: {
   state:
@@ -51,28 +51,28 @@ let updateInfo: {
     | 'update-not-available'
     | 'update-available'
     | 'downloading'
-    | 'update-downloaded';
-  date: number;
-  progress?: number;
-  lastManuallyCheckedAt?: number;
+    | 'update-downloaded'
+  date: number
+  progress?: number
+  lastManuallyCheckedAt?: number
 } = {
   state: 'not-checked',
   date: Date.now(),
-};
+}
 
 const startURL = __DEV__
   ? 'http://localhost:3000'
-  : `file://${path.join(__dirname, 'web/index.html')}`;
+  : `file://${path.join(__dirname, 'web/index.html')}`
 
 function setupBrowserExtensions() {
   const {
     default: installExtension,
     REACT_DEVELOPER_TOOLS,
     REDUX_DEVTOOLS,
-  } = require('electron-devtools-installer'); // tslint:disable-line no-var-requires
+  } = require('electron-devtools-installer') // tslint:disable-line no-var-requires
 
-  installExtension(REACT_DEVELOPER_TOOLS).catch(console.error);
-  installExtension(REDUX_DEVTOOLS).catch(console.error);
+  installExtension(REACT_DEVELOPER_TOOLS).catch(console.error)
+  installExtension(REDUX_DEVTOOLS).catch(console.error)
 }
 
 function getBrowserWindowOptions() {
@@ -84,7 +84,7 @@ function getBrowserWindowOptions() {
         (process.platform === 'linux' ? 28 : 0),
       file: 'main-window.json',
       fullScreen: false,
-    });
+    })
   }
 
   if (!menubarWindowState) {
@@ -93,7 +93,7 @@ function getBrowserWindowOptions() {
       defaultHeight: 600,
       file: 'menubar-window.json',
       fullScreen: false,
-    });
+    })
   }
 
   const options: Electron.BrowserWindowConstructorOptions = {
@@ -145,67 +145,67 @@ function getBrowserWindowOptions() {
           movable: !config.get('lockOnCenter'),
           skipTaskbar: false,
         }),
-  };
+  }
 
-  return options;
+  return options
 }
 
 function showWindow() {
-  if (mainWindow.isMinimized()) mainWindow.restore();
-  if (mainWindow.isVisible()) mainWindow.focus();
-  else mainWindow.show();
+  if (mainWindow.isMinimized()) mainWindow.restore()
+  if (mainWindow.isVisible()) mainWindow.focus()
+  else mainWindow.show()
 }
 
 function createWindow() {
-  const win = new BrowserWindow(getBrowserWindowOptions());
+  const win = new BrowserWindow(getBrowserWindowOptions())
 
-  win.loadURL(startURL);
+  win.loadURL(startURL)
 
   win.once('ready-to-show', () => {
-    win.show();
-  });
+    win.show()
+  })
 
   win.on('show', () => {
-    updateTrayHightlightMode();
-    updateBrowserWindowOptions();
-  });
+    updateTrayHightlightMode()
+    updateBrowserWindowOptions()
+  })
 
   win.on('hide', () => {
-    if (tray) tray.setHighlightMode('selection');
-  });
+    if (tray) tray.setHighlightMode('selection')
+  })
 
   win.on('closed', () => {
-    win.destroy();
-  });
+    win.destroy()
+  })
 
   win.on('resize', () => {
     if (config.get('isMenuBarMode')) {
-      alignWindowWithTray();
+      alignWindowWithTray()
     } else if (config.get('lockOnCenter')) {
-      win.center();
+      win.center()
     }
-  });
+  })
 
   win.on('blur', () => {
     setTimeout(() => {
-      if (config.get('isMenuBarMode') && !win.isDestroyed()) win.hide();
-    }, 200);
-  });
+      if (config.get('isMenuBarMode') && !win.isDestroyed()) win.hide()
+    }, 200)
+  })
 
   win.on('enter-full-screen', () => {
-    if (dock) dock.show();
-  });
+    if (dock) dock.show()
+  })
 
   win.on('leave-full-screen', () => {
-    if (!mainWindow.isFocused()) return;
-    update();
-  });
+    if (!mainWindow.isFocused()) return
+    update()
+  })
 
-  return win;
+  return win
 }
 
 function showTrayContextPopup() {
-  tray!.popUpContextMenu(getTrayContextMenu());
+  tray!.popUpContextMenu(getTrayContextMenu())
 }
 
 function createTray() {
@@ -216,71 +216,71 @@ function createTray() {
         process.platform === 'darwin' ? 'trayIconTemplate' : 'trayIconWhite'
       }.png`,
     ),
-  );
+  )
 
-  if (tray && !tray.isDestroyed()) tray.destroy();
+  if (tray && !tray.isDestroyed()) tray.destroy()
 
-  tray = new Tray(trayIcon);
+  tray = new Tray(trayIcon)
 
   tray.on('click', () => {
     if (mainWindow.isFullScreen()) {
-      showTrayContextPopup();
-      return;
+      showTrayContextPopup()
+      return
     }
 
     if (mainWindow.isVisible() && !mainWindow.isMinimized()) {
       if (mainWindow.isFocused() || process.platform !== 'darwin') {
         if (config.get('isMenuBarMode')) {
-          mainWindow.hide();
+          mainWindow.hide()
         } else {
-          showTrayContextPopup();
+          showTrayContextPopup()
         }
 
-        return;
+        return
       }
     }
 
-    showWindow();
-  });
+    showWindow()
+  })
 
   tray.on('right-click', () => {
-    showTrayContextPopup();
-  });
+    showTrayContextPopup()
+  })
 }
 
 function init() {
-  app.setName('Bara Example');
+  app.setName('Bara Example')
 
-  const gotTheLock = app.requestSingleInstanceLock();
+  const gotTheLock = app.requestSingleInstanceLock()
   if (!gotTheLock) {
-    app.quit();
-    return;
+    app.quit()
+    return
   }
 
   app.on('second-instance', (event, argv, _workingDirectory) => {
-    if (!mainWindow) return;
+    if (!mainWindow) return
 
-    showWindow();
+    showWindow()
 
-    app.emit('open-url', event, __DEV__ ? argv[2] : argv[1]);
-  });
+    app.emit('open-url', event, __DEV__ ? argv[2] : argv[1])
+  })
 
   app.on('ready', () => {
-    const lauchCounter = (config.get('launchCount', 0) as number) + 1;
-    config.set('launchCount', lauchCounter);
+    const lauchCounter = (config.get('launchCount', 0) as number) + 1
+    config.set('launchCount', lauchCounter)
 
     if (__DEV__ && process.platform === 'win32') {
-      app.removeAsDefaultProtocolClient('bara');
+      app.removeAsDefaultProtocolClient('bara')
       app.setAsDefaultProtocolClient('bara', process.execPath, [
         path.resolve(process.argv[1]),
-      ]);
+      ])
     } else {
-      app.setAsDefaultProtocolClient('bara');
+      app.setAsDefaultProtocolClient('bara')
     }
 
-    createTray();
-    if (!mainWindow) mainWindow = createWindow();
-    update();
+    createTray()
+    if (!mainWindow) mainWindow = createWindow()
+    update()
 
     if (process.platform === 'darwin') {
       app.setAboutPanelOptions({
@@ -288,42 +288,42 @@ function init() {
         applicationVersion: app.getVersion(),
         copyright: 'Copyright 2019',
         credits: 'BaraJS',
-      });
+      })
     }
 
     if (__DEV__) {
-      setupBrowserExtensions();
+      setupBrowserExtensions()
     } else {
-      autoUpdater.autoDownload = true;
-      autoUpdater.autoInstallOnAppQuit = true;
-      autoUpdater.checkForUpdatesAndNotify();
+      autoUpdater.autoDownload = true
+      autoUpdater.autoInstallOnAppQuit = true
+      autoUpdater.checkForUpdatesAndNotify()
 
       setInterval(() => {
-        autoUpdater.checkForUpdatesAndNotify();
-      }, 30 * 60000);
+        autoUpdater.checkForUpdatesAndNotify()
+      }, 30 * 60000)
 
-      let lastUpdaterMenuItem = getUpdaterMenuItem();
+      let lastUpdaterMenuItem = getUpdaterMenuItem()
       setInterval(() => {
-        const newUpdaterMenuItem = getUpdaterMenuItem();
+        const newUpdaterMenuItem = getUpdaterMenuItem()
         if (lastUpdaterMenuItem.label !== newUpdaterMenuItem.label) {
-          lastUpdaterMenuItem = newUpdaterMenuItem;
-          updateMenu();
+          lastUpdaterMenuItem = newUpdaterMenuItem
+          updateMenu()
         }
-      }, 5000);
+      }, 5000)
     }
-  });
+  })
 
   app.on('window-all-closed', () => {
     if (process.platform !== 'darwin') {
-      app.quit();
+      app.quit()
     }
-  });
+  })
 
   app.on('activate', () => {
-    if (!mainWindow) mainWindow = createWindow();
+    if (!mainWindow) mainWindow = createWindow()
 
-    mainWindow.show();
-  });
+    mainWindow.show()
+  })
 
   app.on('web-contents-created', (_event, webContents) => {
     webContents.on(
@@ -333,88 +333,88 @@ function init() {
           !app.isDefaultProtocolClient('bara') &&
           `${url.parse(uri).pathname || ''}`.startsWith('/oauth')
         )
-          return;
+          return
 
-        event.preventDefault();
-        shell.openExternal(uri);
+        event.preventDefault()
+        shell.openExternal(uri)
       },
-    );
-  });
+    )
+  })
 
   app.on('open-url', (_event, uri) => {
-    if (!mainWindow) return;
+    if (!mainWindow) return
 
-    mainWindow.webContents.send('open-url', uri);
-    showWindow();
-  });
+    mainWindow.webContents.send('open-url', uri)
+    showWindow()
+  })
 
   ipcMain.on('can-open-url', (e: any, uri?: string) => {
-    let returnValue = false;
+    let returnValue = false
 
-    if (!(e && uri && typeof uri === 'string')) returnValue = false;
+    if (!(e && uri && typeof uri === 'string')) returnValue = false
     else if (uri.startsWith('http://') || uri.startsWith('https://'))
-      returnValue = true;
+      returnValue = true
     else if (uri.startsWith('bara://'))
-      returnValue = app.isDefaultProtocolClient('bara');
+      returnValue = app.isDefaultProtocolClient('bara')
 
-    e.returnValue = returnValue;
-  });
+    e.returnValue = returnValue
+  })
 
   ipcMain.on('open-url', (_e: any, uri?: string) => {
-    if (!mainWindow) return;
+    if (!mainWindow) return
 
-    if (!(uri && typeof uri === 'string' && uri.startsWith('bara://'))) return;
-    mainWindow.webContents.send('open-url', url);
-  });
+    if (!(uri && typeof uri === 'string' && uri.startsWith('bara://'))) return
+    mainWindow.webContents.send('open-url', url)
+  })
 
   ipcMain.on('post-message', (_e: any, data: any) => {
-    if (!mainWindow) return;
+    if (!mainWindow) return
 
-    mainWindow.webContents.send('post-message', data);
-  });
+    mainWindow.webContents.send('post-message', data)
+  })
 
   ipcMain.on('exit-full-screen', () => {
-    if (!mainWindow) return;
-    mainWindow.setFullScreen(false);
-  });
+    if (!mainWindow) return
+    mainWindow.setFullScreen(false)
+  })
 
   autoUpdater.on('error', () => {
-    updateInfo = {...updateInfo, state: 'error', date: Date.now()};
-    updateMenu();
-  });
+    updateInfo = { ...updateInfo, state: 'error', date: Date.now() }
+    updateMenu()
+  })
 
   autoUpdater.on('checking-for-update', () => {
     updateInfo = {
       ...updateInfo,
       state: 'checking-for-update',
       date: Date.now(),
-    };
-    updateMenu();
-  });
+    }
+    updateMenu()
+  })
 
   autoUpdater.on('update-not-available', () => {
     const fromManualCheck =
       updateInfo.lastManuallyCheckedAt &&
-      Date.now() - updateInfo.lastManuallyCheckedAt < 10000;
+      Date.now() - updateInfo.lastManuallyCheckedAt < 10000
 
     updateInfo = {
       ...updateInfo,
       state: 'update-not-available',
       date: Date.now(),
-    };
-    updateMenu();
+    }
+    updateMenu()
 
     if (fromManualCheck) {
       dialog.showMessageBox({
         message: 'There are currently no updates available.',
-      });
+      })
     }
-  });
+  })
 
   autoUpdater.on('update-available', () => {
-    updateInfo = {...updateInfo, state: 'update-available', date: Date.now()};
-    updateMenu();
-  });
+    updateInfo = { ...updateInfo, state: 'update-available', date: Date.now() }
+    updateMenu()
+  })
 
   autoUpdater.on('download-progress', e => {
     updateInfo = {
@@ -422,138 +422,138 @@ function init() {
       state: 'downloading',
       progress: e.percent,
       date: Date.now(),
-    };
-    updateMenu();
-  });
+    }
+    updateMenu()
+  })
 
   autoUpdater.on('update-downloaded', () => {
-    updateInfo = {...updateInfo, state: 'update-downloaded', date: Date.now()};
-    updateMenu();
-  });
+    updateInfo = { ...updateInfo, state: 'update-downloaded', date: Date.now() }
+    updateMenu()
+  })
 }
 
 function getCenterPosition(obj: Electron.BrowserWindow | Electron.Tray) {
-  const bounds = obj.getBounds();
+  const bounds = obj.getBounds()
 
-  const x = Math.round(bounds.x + bounds.width / 2);
-  const y = Math.round(bounds.y + bounds.height / 2);
+  const x = Math.round(bounds.x + bounds.width / 2)
+  const y = Math.round(bounds.y + bounds.height / 2)
 
-  return {x, y};
+  return { x, y }
 }
 
 function alignWindowWithTray() {
-  if (!(tray && !tray.isDestroyed())) return;
+  if (!(tray && !tray.isDestroyed())) return
 
-  const trayBounds = tray.getBounds();
+  const trayBounds = tray.getBounds()
   if (!(trayBounds.width && trayBounds.height)) {
-    mainWindow.center();
-    return;
+    mainWindow.center()
+    return
   }
 
-  const screenSize = screen.getPrimaryDisplay().size;
-  const workArea = screen.getPrimaryDisplay().workArea;
-  const windowBounds = mainWindow.getBounds();
-  const trayCenter = getCenterPosition(tray);
+  const screenSize = screen.getPrimaryDisplay().size
+  const workArea = screen.getPrimaryDisplay().workArea
+  const windowBounds = mainWindow.getBounds()
+  const trayCenter = getCenterPosition(tray)
 
-  const top = trayBounds.y < screenSize.height / 3;
-  const bottom = screenSize.height - trayBounds.y < screenSize.height / 3;
-  const left = trayBounds.x < screenSize.width / 3;
-  const right = screenSize.width - trayBounds.x < screenSize.width / 3;
+  const top = trayBounds.y < screenSize.height / 3
+  const bottom = screenSize.height - trayBounds.y < screenSize.height / 3
+  const left = trayBounds.x < screenSize.width / 3
+  const right = screenSize.width - trayBounds.x < screenSize.width / 3
 
-  let x: number;
-  let y: number;
-  const spacing = 8;
+  let x: number
+  let y: number
+  const spacing = 8
 
   if (top) {
-    y = Math.round(trayCenter.y);
+    y = Math.round(trayCenter.y)
   } else if (bottom) {
-    y = Math.round(trayCenter.y - windowBounds.height / 2);
+    y = Math.round(trayCenter.y - windowBounds.height / 2)
   } else {
-    y = Math.round(trayCenter.y - windowBounds.height / 2);
+    y = Math.round(trayCenter.y - windowBounds.height / 2)
   }
 
   if (left) {
-    x = Math.round(trayCenter.x);
+    x = Math.round(trayCenter.x)
   } else if (right) {
-    x = Math.round(trayCenter.x - windowBounds.width / 2);
+    x = Math.round(trayCenter.x - windowBounds.width / 2)
   } else {
-    x = Math.round(trayCenter.x - windowBounds.width / 2);
+    x = Math.round(trayCenter.x - windowBounds.width / 2)
   }
 
   const fixedX = Math.max(
     workArea.x + spacing,
     Math.min(x, workArea.x + workArea.width - windowBounds.width - spacing),
-  );
+  )
   const fixedY = Math.max(
     workArea.y + spacing,
     Math.min(y, workArea.y + workArea.height - windowBounds.height - spacing),
-  );
+  )
 
-  mainWindow.setPosition(fixedX, fixedY);
+  mainWindow.setPosition(fixedX, fixedY)
 }
 
 function getUpdaterMenuItem() {
-  let enabled: boolean = !__DEV__;
-  let label: string;
+  let enabled: boolean = !__DEV__
+  let label: string
 
   let click: Electron.MenuItemConstructorOptions['click'] = () => {
-    updateInfo.lastManuallyCheckedAt = Date.now();
-    autoUpdater.checkForUpdatesAndNotify();
-  };
+    updateInfo.lastManuallyCheckedAt = Date.now()
+    autoUpdater.checkForUpdatesAndNotify()
+  }
 
   switch (updateInfo.state) {
     case 'checking-for-update': {
-      enabled = false;
-      label = 'Checking for updates...';
-      if (Date.now() - updateInfo.date < 60000) break;
+      enabled = false
+      label = 'Checking for updates...'
+      if (Date.now() - updateInfo.date < 60000) break
     }
 
     case 'downloading': {
-      enabled = false;
+      enabled = false
       label =
         updateInfo.progress && updateInfo.progress > 0
           ? `Downloading update... (${parseFloat(
               `${updateInfo.progress}`,
             ).toFixed(2)}%)`
-          : 'Downloading update...';
-      if (Date.now() - updateInfo.date < 10 * 60000) break;
+          : 'Downloading update...'
+      if (Date.now() - updateInfo.date < 10 * 60000) break
     }
 
     case 'error': {
-      if (!__DEV__) enabled = true;
-      label = 'Failed to download update.';
-      if (Date.now() - updateInfo.date < 60000) break;
+      if (!__DEV__) enabled = true
+      label = 'Failed to download update.'
+      if (Date.now() - updateInfo.date < 60000) break
     }
 
     case 'update-available': {
-      enabled = false;
+      enabled = false
       label = autoUpdater.autoDownload
         ? 'Downloading updates...'
-        : 'Update available. Please wait.';
-      if (Date.now() - updateInfo.date < 10 * 60000) break;
+        : 'Update available. Please wait.'
+      if (Date.now() - updateInfo.date < 10 * 60000) break
     }
 
     case 'update-downloaded': {
-      if (!__DEV__) enabled = true;
-      label = 'Update downloaded. Click to restart.';
+      if (!__DEV__) enabled = true
+      label = 'Update downloaded. Click to restart.'
 
       click = () => {
-        app.relaunch();
-        app.quit();
-      };
+        app.relaunch()
+        app.quit()
+      }
 
-      break;
+      break
     }
 
     case 'update-not-available': {
-      enabled = false;
-      label = 'No updates available.';
-      if (Date.now() - updateInfo.date < 30000) break;
+      enabled = false
+      label = 'No updates available.'
+      if (Date.now() - updateInfo.date < 30000) break
     }
 
     default: {
-      if (!__DEV__) enabled = true;
-      label = 'Check for updates...';
+      if (!__DEV__) enabled = true
+      label = 'Check for updates...'
     }
   }
 
@@ -561,9 +561,9 @@ function getUpdaterMenuItem() {
     label,
     enabled,
     click,
-  };
+  }
 
-  return menuItem;
+  return menuItem
 }
 
 function getAboutMenuItems() {
@@ -579,16 +579,16 @@ function getAboutMenuItems() {
     {
       label: 'View on GitHub',
       click: () => {
-        shell.openExternal('https://github.com/barajs/bara-example');
+        shell.openExternal('https://github.com/barajs/bara-example')
       },
     },
     {
       type: 'separator',
     },
     getUpdaterMenuItem(),
-  ];
+  ]
 
-  return menuItems;
+  return menuItems
 }
 
 function getModeMenuItems() {
@@ -596,11 +596,11 @@ function getModeMenuItems() {
     !(tray && tray.getBounds().width && tray.getBounds().height) &&
     !config.get('isMenuBarMode')
   )
-    return [];
+    return []
 
   const isCurrentWindow =
-    mainWindow && mainWindow.isVisible() && !mainWindow.isMinimized();
-  const enabled = (isCurrentWindow || config.get('isMenuBarMode')) as boolean;
+    mainWindow && mainWindow.isVisible() && !mainWindow.isMinimized()
+  const enabled = (isCurrentWindow || config.get('isMenuBarMode')) as boolean
 
   const menuItems: Electron.MenuItemConstructorOptions[] = [
     {
@@ -609,7 +609,7 @@ function getModeMenuItems() {
       checked: !config.get('isMenuBarMode'),
       enabled,
       click() {
-        enableDesktopMode();
+        enableDesktopMode()
       },
     },
     {
@@ -618,18 +618,18 @@ function getModeMenuItems() {
       checked: !!config.get('isMenuBarMode'),
       enabled,
       click() {
-        enableMenuBarMode();
+        enableMenuBarMode()
       },
     },
-  ];
+  ]
 
-  return menuItems;
+  return menuItems
 }
 
 function getWindowOptionsMenuItems() {
   const isCurrentWindow =
-    mainWindow && mainWindow.isVisible() && !mainWindow.isMinimized();
-  const enabled = isCurrentWindow || config.get('isMenuBarMode');
+    mainWindow && mainWindow.isVisible() && !mainWindow.isMinimized()
+  const enabled = isCurrentWindow || config.get('isMenuBarMode')
 
   const menuItems: Electron.MenuItemConstructorOptions[] = [
     FEATURE_FLAGS.LOCK_ON_CENTER
@@ -640,33 +640,33 @@ function getWindowOptionsMenuItems() {
           enabled,
           visible: !config.get('isMenuBarMode'),
           click(item) {
-            config.set('lockOnCenter', item.checked);
+            config.set('lockOnCenter', item.checked)
 
             if (item.checked) {
               if (!config.get('isMenuBarMode')) {
-                mainWindow.setMovable(false);
+                mainWindow.setMovable(false)
               }
 
-              mainWindow.center();
+              mainWindow.center()
             } else {
               if (!config.get('isMenuBarMode')) {
                 mainWindow.setMovable(
                   getBrowserWindowOptions().movable !== false,
-                );
+                )
               }
             }
           },
         } as Electron.MenuItemConstructorOptions)
       : (undefined as any),
-  ].filter(Boolean);
+  ].filter(Boolean)
 
-  return menuItems;
+  return menuItems
 }
 
 function getMainMenuItems() {
   const isCurrentWindow =
-    mainWindow && mainWindow.isVisible() && !mainWindow.isMinimized();
-  const enabled = (isCurrentWindow || config.get('isMenuBarMode')) as boolean;
+    mainWindow && mainWindow.isVisible() && !mainWindow.isMinimized()
+  const enabled = (isCurrentWindow || config.get('isMenuBarMode')) as boolean
 
   const menuItems: Electron.MenuItemConstructorOptions[] = [
     ...(process.platform === 'darwin'
@@ -695,7 +695,7 @@ function getMainMenuItems() {
                 label: 'Quit',
                 role: 'quit',
                 click: () => {
-                  app.quit();
+                  app.quit()
                 },
               },
             ],
@@ -747,14 +747,14 @@ function getMainMenuItems() {
           label: 'Reload',
           accelerator: 'CmdOrCtrl+R',
           click(_, focusedWindow) {
-            if (focusedWindow) focusedWindow.reload();
+            if (focusedWindow) focusedWindow.reload()
           },
         },
         {
           label: 'Restart',
           click() {
-            app.relaunch();
-            app.quit();
+            app.relaunch()
+            app.quit()
           },
         },
         {
@@ -766,14 +766,14 @@ function getMainMenuItems() {
             : undefined,
           visible: __DEV__,
           click(_, focusedWindow) {
-            if (focusedWindow) focusedWindow.webContents.toggleDevTools();
+            if (focusedWindow) focusedWindow.webContents.toggleDevTools()
           },
         },
-        {type: 'separator', enabled},
-        {role: 'resetzoom', enabled},
-        {role: 'zoomin', enabled},
-        {role: 'zoomout', enabled},
-        {type: 'separator', enabled},
+        { type: 'separator', enabled },
+        { role: 'resetzoom', enabled },
+        { role: 'zoomin', enabled },
+        { role: 'zoomout', enabled },
+        { type: 'separator', enabled },
         ...getModeMenuItems(),
       ],
     },
@@ -782,7 +782,7 @@ function getMainMenuItems() {
       role: 'window',
       submenu: [
         ...getWindowMenuItems(),
-        {type: 'separator', enabled},
+        { type: 'separator', enabled },
         ...getWindowOptionsMenuItems(),
       ],
     },
@@ -801,37 +801,41 @@ function getMainMenuItems() {
         {
           label: 'Report bug',
           click: () => {
-            shell.openExternal('https://github.com/barajs/bara-example/issues/new');
+            shell.openExternal(
+              'https://github.com/barajs/bara-example/issues/new',
+            )
           },
         },
         {
           label: 'Send feedback',
           click: () => {
-            shell.openExternal('https://github.com/barajs/bara-example/issues/new');
+            shell.openExternal(
+              'https://github.com/barajs/bara-example/issues/new',
+            )
           },
         },
       ],
     },
-  ];
+  ]
 
-  return menuItems;
+  return menuItems
 }
 
 function getDockMenuItems() {
-  return getModeMenuItems();
+  return getModeMenuItems()
 }
 
 function getWindowMenuItems() {
   const isCurrentWindow =
-    mainWindow && mainWindow.isVisible() && !mainWindow.isMinimized();
-  const enabled = (isCurrentWindow || config.get('isMenuBarMode')) as boolean;
+    mainWindow && mainWindow.isVisible() && !mainWindow.isMinimized()
+  const enabled = (isCurrentWindow || config.get('isMenuBarMode')) as boolean
 
   const menuItems: Electron.MenuItemConstructorOptions[] = [
     {
       label: 'Close',
       accelerator: 'CmdOrCtrl+W',
       click() {
-        mainWindow.hide();
+        mainWindow.hide()
       },
     },
     {
@@ -845,32 +849,32 @@ function getWindowMenuItems() {
       enabled,
       checked: mainWindow && mainWindow.isMaximized(),
       click(item) {
-        showWindow();
+        showWindow()
 
-        if (item.checked) mainWindow.maximize();
-        else mainWindow.unmaximize();
+        if (item.checked) mainWindow.maximize()
+        else mainWindow.unmaximize()
       },
     },
     {
       visible: !config.get('isMenuBarMode'),
       role: 'togglefullscreen',
     },
-  ];
+  ]
 
-  return menuItems;
+  return menuItems
 }
 
 function getTrayMenuItems() {
   const isCurrentWindow =
-    mainWindow && mainWindow.isVisible() && !mainWindow.isMinimized();
-  const enabled = isCurrentWindow || config.get('isMenuBarMode');
+    mainWindow && mainWindow.isVisible() && !mainWindow.isMinimized()
+  const enabled = isCurrentWindow || config.get('isMenuBarMode')
 
   const menuItems: Electron.MenuItemConstructorOptions[] = [
     {
       label: 'Open',
       visible: !isCurrentWindow || config.get('isMenuBarMode'),
       click() {
-        showWindow();
+        showWindow()
       },
     },
     {
@@ -908,17 +912,17 @@ function getTrayMenuItems() {
       accelerator: 'CmdOrCtrl+Q',
       role: 'quit',
     },
-  ].filter(Boolean) as Electron.MenuItemConstructorOptions[];
+  ].filter(Boolean) as Electron.MenuItemConstructorOptions[]
 
-  return menuItems;
+  return menuItems
 }
 
 function getTrayContextMenu() {
-  return Menu.buildFromTemplate(getTrayMenuItems());
+  return Menu.buildFromTemplate(getTrayMenuItems())
 }
 
 function updateTrayHightlightMode() {
-  if (!(tray && !tray.isDestroyed())) return;
+  if (!(tray && !tray.isDestroyed())) return
 
   tray.setHighlightMode(
     config.get('isMenuBarMode') &&
@@ -927,24 +931,24 @@ function updateTrayHightlightMode() {
       !mainWindow.isFullScreen()
       ? 'always'
       : 'selection',
-  );
+  )
 }
 
 function updateBrowserWindowOptions() {
-  const options = getBrowserWindowOptions();
+  const options = getBrowserWindowOptions()
 
   const maximize =
     !config.get('isMenuBarMode') &&
     (mainWindow.isMaximized() ||
       mainWindowState.isMaximized ||
-      config.get('launchCount') === 1);
+      config.get('launchCount') === 1)
 
-  mainWindow.setAlwaysOnTop(options.alwaysOnTop === true);
+  mainWindow.setAlwaysOnTop(options.alwaysOnTop === true)
 
   mainWindow.setMinimumSize(
     Math.floor(options.minWidth || 0),
     Math.floor(options.minHeight || 0),
-  );
+  )
 
   mainWindow.setMaximumSize(
     Math.ceil(
@@ -959,19 +963,19 @@ function updateBrowserWindowOptions() {
           ? screen.getPrimaryDisplay().workAreaSize.height
           : 0),
     ),
-  );
+  )
 
-  mainWindow.setMovable(options.movable !== false);
+  mainWindow.setMovable(options.movable !== false)
 
   mainWindow.setPosition(
     maximize ? screen.getPrimaryDisplay().workArea.x || 0 : options.x || 0,
     maximize ? screen.getPrimaryDisplay().workArea.y || 0 : options.y || 0,
     false,
-  );
+  )
 
   // Note: setSkipTaskbar was causing the app to freeze on linux
   if (process.platform === 'darwin' || process.platform === 'win32') {
-    mainWindow.setSkipTaskbar(options.skipTaskbar === true);
+    mainWindow.setSkipTaskbar(options.skipTaskbar === true)
   }
 
   if (maximize) {
@@ -981,84 +985,84 @@ function updateBrowserWindowOptions() {
         screen.getPrimaryDisplay().workAreaSize.width,
         screen.getPrimaryDisplay().workAreaSize.height,
         false,
-      );
+      )
     }
   } else {
-    mainWindow.setSize(options.width || 500, options.height || 500, false);
+    mainWindow.setSize(options.width || 500, options.height || 500, false)
   }
 
   if (dock) {
     if (options.skipTaskbar === true) {
-      dock.hide();
+      dock.hide()
     } else {
-      dock.show();
+      dock.show()
     }
   }
 
-  mainWindowState.unmanage();
-  menubarWindowState.unmanage();
+  mainWindowState.unmanage()
+  menubarWindowState.unmanage()
   if (config.get('isMenuBarMode')) {
-    menubarWindowState.manage(mainWindow);
+    menubarWindowState.manage(mainWindow)
   } else {
-    mainWindowState.manage(mainWindow);
+    mainWindowState.manage(mainWindow)
   }
 
   if (config.get('isMenuBarMode')) {
-    alignWindowWithTray();
+    alignWindowWithTray()
   } else {
     if (config.get('lockOnCenter')) {
-      mainWindow.center();
+      mainWindow.center()
     }
 
     if (maximize) {
-      mainWindow.maximize();
+      mainWindow.maximize()
     }
   }
 }
 
 function updateMenu() {
-  Menu.setApplicationMenu(Menu.buildFromTemplate(getMainMenuItems()));
+  Menu.setApplicationMenu(Menu.buildFromTemplate(getMainMenuItems()))
 
   if (process.platform === 'linux') {
-    tray!.setContextMenu(getTrayContextMenu());
+    tray!.setContextMenu(getTrayContextMenu())
   }
 
   if (process.platform === 'darwin') {
     const touchBar = new TouchBar({
       items: [],
-    });
+    })
 
-    mainWindow.setTouchBar(touchBar);
+    mainWindow.setTouchBar(touchBar)
   }
 
-  if (dock) dock.setMenu(Menu.buildFromTemplate(getDockMenuItems()));
+  if (dock) dock.setMenu(Menu.buildFromTemplate(getDockMenuItems()))
 }
 
 function update() {
-  showWindow();
-  updateMenu();
-  updateTrayHightlightMode();
-  updateBrowserWindowOptions();
+  showWindow()
+  updateMenu()
+  updateTrayHightlightMode()
+  updateBrowserWindowOptions()
 }
 
 function updateOrRecreateWindow() {
   if (frameIsDifferentBetweenModes) {
-    const oldWindow = mainWindow;
-    mainWindow = createWindow();
-    oldWindow.close();
+    const oldWindow = mainWindow
+    mainWindow = createWindow()
+    oldWindow.close()
   }
 
-  update();
+  update()
 }
 
 function enableDesktopMode() {
-  config.set('isMenuBarMode', false);
-  updateOrRecreateWindow();
+  config.set('isMenuBarMode', false)
+  updateOrRecreateWindow()
 }
 
 function enableMenuBarMode() {
-  config.set('isMenuBarMode', true);
-  updateOrRecreateWindow();
+  config.set('isMenuBarMode', true)
+  updateOrRecreateWindow()
 }
 
-init();
+init()
