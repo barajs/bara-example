@@ -16,7 +16,7 @@ import path from 'path';
 import url from 'url';
 
 import {__DEV__} from './electron-is-dev';
-import {WindowState, windowStateKeeper} from './electron-window-state';
+import {WindowState, windowStateKeeper} from './electron-window-state/index';
 
 const FEATURE_FLAGS = {
   LOCK_ON_CENTER: process.platform !== 'linux',
