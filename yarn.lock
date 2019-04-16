@@ -2237,10 +2237,10 @@ balanced-match@^1.0.0:
   resolved "https://registry.yarnpkg.com/balanced-match/-/balanced-match-1.0.0.tgz#89b4d199ab2bee49de164ea02b89ce462d71b767"
   integrity sha1-ibTRmasr7kneFk6gK4nORi1xt2c=
 
-bara-react@1.3.2:
-  version "1.3.2"
-  resolved "https://registry.yarnpkg.com/bara-react/-/bara-react-1.3.2.tgz#d9c89c0e8f45f4f31afa3cbf9e435e475c12da5b"
-  integrity sha512-vNOhvPCcQT7l485guc2pI0k3saWdT2AzlIGXnEqsVUe/iuL/835HR0rhuq/YblO25PrPK9Z9kAIaWEZS4yLL0A==
+bara-react@2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/bara-react/-/bara-react-2.0.0.tgz#7dcb6aa3640d71060a49d58e65633df5fec81464"
+  integrity sha512-dGuiRCQlacz2nGSbM1lRzPmpJe9KeTD4uXAXDtqYbRjKe096MWN07giTp7EmQMk2L1F16r0RRFFLZbur9MjeqA==
   dependencies:
     bara "2.2.0"
     fbemitter "2.1.1"
