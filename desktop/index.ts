@@ -579,7 +579,7 @@ function getAboutMenuItems() {
     {
       label: 'View on GitHub',
       click: () => {
-        shell.openExternal('https://github.com/baraapp/bara');
+        shell.openExternal('https://github.com/barajs/bara-example');
       },
     },
     {
@@ -801,13 +801,13 @@ function getMainMenuItems() {
         {
           label: 'Report bug',
           click: () => {
-            shell.openExternal('https://github.com/baraapp/bara/issues/new');
+            shell.openExternal('https://github.com/barajs/bara-example/issues/new');
           },
         },
         {
           label: 'Send feedback',
           click: () => {
-            shell.openExternal('https://github.com/baraapp/bara/issues/new');
+            shell.openExternal('https://github.com/barajs/bara-example/issues/new');
           },
         },
       ],
