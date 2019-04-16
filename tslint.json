@@ -15,7 +15,6 @@
     "no-empty-interface": false,
     "no-namespace": false,
     "no-reference": false,
-    "no-unused-variable": true,
     "object-literal-sort-keys": false,
     "object-shorthand-properties-first": false,
     "prefer-array-literal": false,
