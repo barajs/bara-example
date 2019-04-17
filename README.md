@@ -2,6 +2,8 @@
 
 Example Bara React app build on cross-platforms: Windows, Linux, MacOS, Web, Android and iOS.
 
+[![Build Status](https://app.bitrise.io/app/5f3a6dbafbf27adc/status.svg?token=ONZD3qcG8oWeb1ETlFtAww&branch=master)](https://app.bitrise.io/app/5f3a6dbafbf27adc)
+
 ## How to install
 
 ```
