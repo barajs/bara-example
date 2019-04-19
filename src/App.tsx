@@ -10,9 +10,14 @@
 
 import { BaraProvider, TouchableOpacity } from 'bara-react'
 import React, { Component } from 'react'
-import { Platform, StyleSheet, Text, View } from 'react-native'
+import { Dimensions, Platform, StyleSheet, View } from 'react-native'
+import { ColumnWidthProvider } from './ColumnWidthContext'
+import { DimensionsProvider } from './DimensionsContext'
+import { AppLayoutProvider } from './LayoutContext'
 
+import { AudioScreen } from './features/audio-screen'
 import { Sidebar } from './features/sidebar'
+import { VideoScreen } from './features/video-screen'
 
 const instructions = Platform.select({
   ios: 'Press Cmd+R to reload,\n' + 'Cmd+D or shake for dev menu',
@@ -26,15 +31,17 @@ export default class App extends Component<Props> {
   render() {
     return (
       <BaraProvider>
-        <View style={styles.container}>
-          <Text style={styles.welcome}>Welcome to Bara React Native!</Text>
-          <Text style={styles.instructions}>To get started, edit App.tsx</Text>
-          <Text style={styles.instructions}>{instructions}</Text>
-          <TouchableOpacity name="bara-button">
-            <Text>Bara Button</Text>
-          </TouchableOpacity>
-          <Sidebar />
-        </View>
+        <DimensionsProvider>
+          <AppLayoutProvider>
+            <ColumnWidthProvider>
+              <View style={styles.container}>
+                <Sidebar />
+                <VideoScreen />
+                <AudioScreen />
+              </View>
+            </ColumnWidthProvider>
+          </AppLayoutProvider>
+        </DimensionsProvider>
       </BaraProvider>
     )
   }
@@ -43,18 +50,7 @@ export default class App extends Component<Props> {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
-  },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
-  },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
+    backgroundColor: '#DCDCDC',
+    flexDirection: 'row',
   },
 })

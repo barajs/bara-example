@@ -25,7 +25,8 @@
     "lint": "tslint -p ."
   },
   "dependencies": {
-    "bara": "2.2.0",
+    "@vgm/tv-core": "^3.2.1",
+    "bara": "2.3.0",
     "bara-react": "2.0.0",
     "electron-store": "3.2.0",
     "electron-updater": "4.0.6",
