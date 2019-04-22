@@ -1008,16 +1008,6 @@
     lodash "^4.17.11"
     to-fast-properties "^2.0.0"
 
-"@bara/barn@^2.2.0":
-  version "2.2.0"
-  resolved "https://registry.yarnpkg.com/@bara/barn/-/barn-2.2.0.tgz#c9a230422e54ea18413deee6a10ca50f378a694c"
-  integrity sha512-I4WdWgZhZB17ppsISM2kRze3iHZklh0JRPT1+v83ob/D2oXpGQO9f2lUEhvcPGBByzB7VU5rqFIrm9XszP0oDg==
-  dependencies:
-    "@bara/basics" "^2.2.0"
-    "@bara/core" "^2.2.0"
-    dot-prop "5.0.0"
-    xstream "11.10.0"
-
 "@bara/barn@^2.3.1":
   version "2.3.1"
   resolved "https://registry.yarnpkg.com/@bara/barn/-/barn-2.3.1.tgz#74af0cac66534fd881cc4e31e5ad8d7011bb017c"
@@ -1027,26 +1017,12 @@
     "@bara/core" "^2.3.1"
     dot-prop "5.0.0"
 
-"@bara/basics@^2.2.0":
-  version "2.2.0"
-  resolved "https://registry.yarnpkg.com/@bara/basics/-/basics-2.2.0.tgz#a5171f92532703dbbff7e8f70bd8fc3fcde0087a"
-  integrity sha512-1fjbE8cYsdeV/l3HgVzgY2KUr4YhXGmAJzBjDc5Eg1B5Fdd/eNcVsYrruIaRYjGEMQll0xtgFh4IQVjAOnXhGA==
-  dependencies:
-    "@bara/core" "^2.2.0"
-
 "@bara/basics@^2.3.1":
   version "2.3.1"
   resolved "https://registry.yarnpkg.com/@bara/basics/-/basics-2.3.1.tgz#27ec2f157f327af85b500a4ca31bdfb9f9a69334"
   integrity sha512-QkSvXFcYwzlwRmv1r15jUVc73WK/bspe6A1geqJpRQJ66+04rq+5Vq0/QsOISSC4Y5rf+eewiVF6dVGDNMiXDA==
   dependencies:
     "@bara/core" "^2.3.1"
-
-"@bara/core@^2.2.0":
-  version "2.2.0"
-  resolved "https://registry.yarnpkg.com/@bara/core/-/core-2.2.0.tgz#bb1caa0927800137b51dd38e15b9fa9d44ca073f"
-  integrity sha512-qh3PG1TfIhSjUTLoxcwPh8Uh6DS6kuIdOWZhgg/qAvXzAxWdylXA8BkCyP6L7mDmReKdEGGvRjOGa03FUkVFqg==
-  dependencies:
-    xstream "11.10.0"
 
 "@bara/core@^2.3.1":
   version "2.3.1"
@@ -2298,23 +2274,22 @@ balanced-match@^1.0.0:
   resolved "https://registry.yarnpkg.com/balanced-match/-/balanced-match-1.0.0.tgz#89b4d199ab2bee49de164ea02b89ce462d71b767"
   integrity sha1-ibTRmasr7kneFk6gK4nORi1xt2c=
 
-bara-react@2.0.0:
-  version "2.0.0"
-  resolved "https://registry.yarnpkg.com/bara-react/-/bara-react-2.0.0.tgz#7dcb6aa3640d71060a49d58e65633df5fec81464"
-  integrity sha512-dGuiRCQlacz2nGSbM1lRzPmpJe9KeTD4uXAXDtqYbRjKe096MWN07giTp7EmQMk2L1F16r0RRFFLZbur9MjeqA==
+bara-react-icons@1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/bara-react-icons/-/bara-react-icons-1.0.0.tgz#c02b139a0fd5d6d9eed401821a4da0634316d564"
+  integrity sha512-pkvHMVKwh+OXmGKJq6aAWbu1gSmRM8f3jOUwOyLb3k7j6N0SFzWSRTppsntZGl32IAwdVSGDuCMQ7XMngxNUQQ==
   dependencies:
-    bara "2.2.0"
-    fbemitter "2.1.1"
-    react-native-web "0.11.2"
+    bara "2.3.1"
+    bara-react "2.0.1"
+    react-native-vector-icons "6.4.2"
 
-bara@2.2.0:
-  version "2.2.0"
-  resolved "https://registry.yarnpkg.com/bara/-/bara-2.2.0.tgz#dd4e57cdfcac915edea25de882827c5294a9c026"
-  integrity sha512-hbYuedzXGp03xpRfxdBg7sHHpBJaFisB0zuW6UKflqigRIoo1Yjj0IJo/F048WlWyWyMUPbmJh6HvrHkPlYd5Q==
+bara-react@2.0.1:
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/bara-react/-/bara-react-2.0.1.tgz#97f2664001c41138da1e29a2c174223984944a2a"
+  integrity sha512-CFUpGwUmgWtsFZ5moU/IvYhZHklF+CiTy8AiSlUbDUKZMT+Q65IZ9P4JfuBM6CZYzWsl1GfaXCWGtxg/lmlBxA==
   dependencies:
-    "@bara/barn" "^2.2.0"
-    "@bara/basics" "^2.2.0"
-    "@bara/core" "^2.2.0"
+    bara "2.3.1"
+    react-native-web "0.11.2"
 
 bara@2.3.1:
   version "2.3.1"
@@ -4924,13 +4899,6 @@ fb-watchman@^2.0.0:
   dependencies:
     bser "^2.0.0"
 
-fbemitter@2.1.1:
-  version "2.1.1"
-  resolved "https://registry.yarnpkg.com/fbemitter/-/fbemitter-2.1.1.tgz#523e14fdaf5248805bb02f62efc33be703f51865"
-  integrity sha1-Uj4U/a9SSIBbsC9i78M75wP1GGU=
-  dependencies:
-    fbjs "^0.8.4"
-
 fbjs-css-vars@^1.0.0:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/fbjs-css-vars/-/fbjs-css-vars-1.0.2.tgz#216551136ae02fe255932c3ec8775f18e2c078b8"
@@ -4952,7 +4920,7 @@ fbjs-scripts@^1.0.0:
     semver "^5.1.0"
     through2 "^2.0.0"
 
-fbjs@^0.8.4, fbjs@^0.8.9:
+fbjs@^0.8.9:
   version "0.8.17"
   resolved "https://registry.yarnpkg.com/fbjs/-/fbjs-0.8.17.tgz#c4d598ead6949112653d6588b01a5cdcd9f90fdd"
   integrity sha1-xNWY6taUkRJlPWWIsBpc3Nn5D90=
@@ -7580,7 +7548,7 @@ lodash.uniq@^4.5.0:
   resolved "https://registry.yarnpkg.com/lodash.uniq/-/lodash.uniq-4.5.0.tgz#d0225373aeb652adc1bc82e4945339a842754773"
   integrity sha1-0CJTc662Uq3BvILklFM5qEJ1R3M=
 
-"lodash@>=3.5 <5", lodash@^4.17.10, lodash@^4.17.11, lodash@^4.17.4, lodash@^4.17.5, lodash@^4.3.0, lodash@^4.6.1:
+"lodash@>=3.5 <5", lodash@^4.0.0, lodash@^4.17.10, lodash@^4.17.11, lodash@^4.17.4, lodash@^4.17.5, lodash@^4.3.0, lodash@^4.6.1:
   version "4.17.11"
   resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.11.tgz#b39ea6229ef607ecd89e2c8df12536891cac9b8d"
   integrity sha512-cQKh8igo5QUhZ7lg38DYWAxMvjSAKG0A8wGSVimP07SIUEK2UO+arSRKbRZWtelMtN5V0Hkwh5ryOto/SshYIg==
@@ -10335,6 +10303,15 @@ react-is@^16.8.1, react-is@^16.8.6:
   version "16.8.6"
   resolved "https://registry.yarnpkg.com/react-is/-/react-is-16.8.6.tgz#5bbc1e2d29141c9fbdfed456343fe2bc430a6a16"
   integrity sha512-aUk3bHfZ2bRSVFFbbeVS4i+lNPZr3/WM5jT2J5omUVV1zzcs1nAaf3l51ctA5FFvCRbhrH0bdAsRRQddFJZPtA==
+
+react-native-vector-icons@6.4.2:
+  version "6.4.2"
+  resolved "https://registry.yarnpkg.com/react-native-vector-icons/-/react-native-vector-icons-6.4.2.tgz#ee0b097e783387544ed160a3192a437c097e551d"
+  integrity sha512-G7Y5HksOQkCanFWKJ+fjwP38XL8tQREOSnw7jrbq28AFrrv41YtafOF4uDSDS7HxMRXs17HeEzn24OzJb63iuA==
+  dependencies:
+    lodash "^4.0.0"
+    prop-types "^15.6.2"
+    yargs "^13.2.2"
 
 react-native-web@0.11.2:
   version "0.11.2"
@@ -13333,7 +13310,7 @@ yargs@^12.0.1:
     y18n "^3.2.1 || ^4.0.0"
     yargs-parser "^11.1.1"
 
-yargs@^13.2.1:
+yargs@^13.2.1, yargs@^13.2.2:
   version "13.2.2"
   resolved "https://registry.yarnpkg.com/yargs/-/yargs-13.2.2.tgz#0c101f580ae95cea7f39d927e7770e3fdc97f993"
   integrity sha512-WyEoxgyTD3w5XRpAQNYUB9ycVH/PQrToaTXdYXRdOXvEy1l19br+VJsc0vcO8PTGg5ro/l/GY7F/JMEBmI0BxA==
