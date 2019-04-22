@@ -1295,6 +1295,22 @@
   resolved "https://registry.yarnpkg.com/@types/q/-/q-1.5.2.tgz#690a1475b84f2a884fd07cd797c00f5f31356ea8"
   integrity sha512-ce5d3q03Ex0sy4R14722Rmt6MT07Ua+k4FwDfdcToYJcMKNtRVQvJ6JCAPdAmAnbRb6CsX6aYb9m96NGod9uTw==
 
+"@types/react-native-vector-icons@6.4.0":
+  version "6.4.0"
+  resolved "https://registry.yarnpkg.com/@types/react-native-vector-icons/-/react-native-vector-icons-6.4.0.tgz#3ff6b29c8e831f11364c12801ae7966dab8dcbe0"
+  integrity sha512-UNRMIMbqeryNDQvZVZoPyqXIKLWmLRInhN5gDySxquJcZvWNW+1NSm4lXQlRdzC9Da3mSU1QEppoeI438f2JRw==
+  dependencies:
+    "@types/react" "*"
+    "@types/react-native" "*"
+
+"@types/react-native@*":
+  version "0.57.47"
+  resolved "https://registry.yarnpkg.com/@types/react-native/-/react-native-0.57.47.tgz#e7b6285ffa445ba474e4fdad4f2e6eda62fb392a"
+  integrity sha512-XeRcyrhPOsYEBOvh2RlLajNFmiDRALwAKiHXqPEEbYWzyJTKz095Cs/coHbUHQnDcKVmib4uHmrDAOK1q0PkmA==
+  dependencies:
+    "@types/prop-types" "*"
+    "@types/react" "*"
+
 "@types/react-native@0.57.45":
   version "0.57.45"
   resolved "https://registry.yarnpkg.com/@types/react-native/-/react-native-0.57.45.tgz#bc341b2fbe879aec6d52f799f7342f674e045c4f"
@@ -2296,10 +2312,10 @@ balanced-match@^1.0.0:
   resolved "https://registry.yarnpkg.com/balanced-match/-/balanced-match-1.0.0.tgz#89b4d199ab2bee49de164ea02b89ce462d71b767"
   integrity sha1-ibTRmasr7kneFk6gK4nORi1xt2c=
 
-bara-react-icons@1.0.0:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/bara-react-icons/-/bara-react-icons-1.0.0.tgz#c02b139a0fd5d6d9eed401821a4da0634316d564"
-  integrity sha512-pkvHMVKwh+OXmGKJq6aAWbu1gSmRM8f3jOUwOyLb3k7j6N0SFzWSRTppsntZGl32IAwdVSGDuCMQ7XMngxNUQQ==
+bara-react-icons@1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/bara-react-icons/-/bara-react-icons-1.1.0.tgz#85aa56bba763727faa3179d153b2e187868841a3"
+  integrity sha512-TQjH//I/IofzWq8G2HXnpsXVLAS4EW9dOAUp+3AMKKmyScghkXCsugKk4UTb/qT0FNIztjDeePbuf1IrNst1/Q==
   dependencies:
     bara "2.3.1"
     bara-react "2.0.1"

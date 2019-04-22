@@ -1,18 +1,27 @@
 {
-  "extends": "../../tsconfig.base.json",
   "compilerOptions": {
-    "allowJs": false,
-    "forceConsistentCasingInFileNames": true,
-    "isolatedModules": true,
-    "jsx": "preserve",
-    "noEmit": true,
+    "target": "es5",
+    "module": "esnext",
+    "moduleResolution": "node",
+    "lib": [
+      "esnext",
+      "dom",
+      "dom.iterable"
+    ],
+  "allowJs": false,
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
+    "isolatedModules": false,
+    "jsx": "react",
+    "noEmit": false,
+    "resolveJsonModule": true,
+    "skipLibCheck": true,
+    "sourceMap": true,
+    "strict": true,
+    "declaration": true,
+    "rootDir": "src",
     "outDir": "dist",
-    "rootDir": "src"
+    "typeRoots": [ "./@types", "./node_modules/@types" ]
   },
-  "include": [
-    "src/index.ts"
-  ],
-  "exclude": [
-    "src/setupProxy.js"
-  ]
+  "include": [ "src" ]
 }

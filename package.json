@@ -14,7 +14,7 @@
     "do:desktop": "cross-env BROWSER=none concurrently \"yarn dev:web\" \"yarn compile:desktop -w\" \"wait-on http://localhost:3000 && yarn watch:desktop\"",
     "compile": "run-s compile:tsc compile:web compile:desktop",
     "compile:tsc": "tsc -b",
-    "compile:web": "react-scripts build",
+    "compile:web": "craco build",
     "compile:desktop": "tsc -b ./tsconfig.desktop.json",
     "build:desktop": "run-s clean compile:desktop compile:web build:desktop:cpres build:desktop:electron",
     "build:desktop:cpres": "shx cp -R build dist/web",
@@ -27,14 +27,16 @@
   "dependencies": {
     "bara": "2.3.1",
     "bara-react": "2.0.1",
-    "bara-react-icons": "1.0.0",
+    "bara-react-icons": "1.1.0",
     "electron-store": "3.2.0",
     "electron-updater": "4.0.6",
     "jsonfile": "5.0.0",
     "mkdirp": "0.5.1",
     "react": "16.8.6",
+    "react-app-polyfill": "0.2.2",
     "react-dom": "16.8.6",
-    "react-native": "0.59.4"
+    "react-native": "0.59.4",
+    "react-native-vector-icons": "6.4.2"
   },
   "devDependencies": {
     "@babel/core": "7.4.3",
@@ -50,6 +52,7 @@
     "@types/node": "11.13.4",
     "@types/react": "16.8.13",
     "@types/react-native": "0.57.45",
+    "@types/react-native-vector-icons": "6.4.0",
     "@types/react-test-renderer": "16.8.1",
     "babel-plugin-react-native-web": "0.11.2",
     "concurrently": "4.1.0",
@@ -63,7 +66,6 @@
     "nodemon": "1.18.11",
     "npm-run-all": "4.1.5",
     "prettier": "1.17.0",
-    "react-app-polyfill": "0.2.2",
     "react-scripts": "2.1.8",
     "react-test-renderer": "16.8.6",
     "shx": "0.3.2",
