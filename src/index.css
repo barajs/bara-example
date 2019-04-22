@@ -1,0 +1,49 @@
+::-webkit-scrollbar {
+  width: 1px;
+  height: 1px;
+  background-color: transparent;
+}
+
+::-webkit-scrollbar-thumb
+{
+  background-color: transparent;
+}
+
+*:focus {
+  outline-color: #49d3b4;
+}
+
+*[tabIndex^="-1"]:focus {
+  outline: none;
+}
+
+html, body, #root, #root > div {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: #292C33;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+a:hover, a:hover > *:not([class*='touchAction']) {
+  text-decoration: underline;
+}
+
+input:focus {
+  outline: none !important;
+}
+
+/* https://github.com/necolas/react-native-web/issues/1299 */
+.pagingEnabledFix > div > div > div {
+  height: 100%;
+}
+
