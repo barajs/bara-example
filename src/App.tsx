@@ -12,6 +12,8 @@ import { BaraProvider, TouchableOpacity } from 'bara-react'
 import React, { Component } from 'react'
 import { Platform, StyleSheet, Text, View } from 'react-native'
 
+import { Octicons as Icon } from 'bara-react-icons/es'
+
 import { Sidebar } from './features/sidebar'
 
 const instructions = Platform.select({
@@ -27,6 +29,7 @@ export default class App extends Component<Props> {
     return (
       <BaraProvider>
         <View style={styles.container}>
+          <Icon name="chevron-right" size={30} />
           <Text style={styles.welcome}>Welcome to Bara React Native!</Text>
           <Text style={styles.instructions}>To get started, edit App.tsx</Text>
           <Text style={styles.instructions}>{instructions}</Text>

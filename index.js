@@ -9,6 +9,6 @@ import { name as appName } from './app.json'
 import registerBaraFeatures from './src/bara'
 
 register(() => {
-  useReactApp({ name: appName, isNative: true, App })
   registerBaraFeatures()
+  useReactApp({ name: appName, isNative: true, App })
 })
