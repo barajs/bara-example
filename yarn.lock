@@ -1018,6 +1018,15 @@
     dot-prop "5.0.0"
     xstream "11.10.0"
 
+"@bara/barn@^2.3.1":
+  version "2.3.1"
+  resolved "https://registry.yarnpkg.com/@bara/barn/-/barn-2.3.1.tgz#74af0cac66534fd881cc4e31e5ad8d7011bb017c"
+  integrity sha512-0zS72TLvaprjHpOrj8O6f91lPB52qIoOVee3Zu+BZFdU2wkWCcgJf/Ag33txsfHRcg6eIi2h5Pbcv+aSa0C0TQ==
+  dependencies:
+    "@bara/basics" "^2.3.1"
+    "@bara/core" "^2.3.1"
+    dot-prop "5.0.0"
+
 "@bara/basics@^2.2.0":
   version "2.2.0"
   resolved "https://registry.yarnpkg.com/@bara/basics/-/basics-2.2.0.tgz#a5171f92532703dbbff7e8f70bd8fc3fcde0087a"
@@ -1025,10 +1034,24 @@
   dependencies:
     "@bara/core" "^2.2.0"
 
+"@bara/basics@^2.3.1":
+  version "2.3.1"
+  resolved "https://registry.yarnpkg.com/@bara/basics/-/basics-2.3.1.tgz#27ec2f157f327af85b500a4ca31bdfb9f9a69334"
+  integrity sha512-QkSvXFcYwzlwRmv1r15jUVc73WK/bspe6A1geqJpRQJ66+04rq+5Vq0/QsOISSC4Y5rf+eewiVF6dVGDNMiXDA==
+  dependencies:
+    "@bara/core" "^2.3.1"
+
 "@bara/core@^2.2.0":
   version "2.2.0"
   resolved "https://registry.yarnpkg.com/@bara/core/-/core-2.2.0.tgz#bb1caa0927800137b51dd38e15b9fa9d44ca073f"
   integrity sha512-qh3PG1TfIhSjUTLoxcwPh8Uh6DS6kuIdOWZhgg/qAvXzAxWdylXA8BkCyP6L7mDmReKdEGGvRjOGa03FUkVFqg==
+  dependencies:
+    xstream "11.10.0"
+
+"@bara/core@^2.3.1":
+  version "2.3.1"
+  resolved "https://registry.yarnpkg.com/@bara/core/-/core-2.3.1.tgz#5b1efb982b2ce59e1325a9ed33fa7ffcede75c40"
+  integrity sha512-8r+rwjHVWhMM9d4GTkNTM+OqHUGAVx/wUiOH+s68IiiBtnYTYlty/RQMKLE7uNcVHbPWvXArW9NLqQyPmQmAhA==
   dependencies:
     xstream "11.10.0"
 
@@ -2292,6 +2315,15 @@ bara@2.2.0:
     "@bara/barn" "^2.2.0"
     "@bara/basics" "^2.2.0"
     "@bara/core" "^2.2.0"
+
+bara@2.3.1:
+  version "2.3.1"
+  resolved "https://registry.yarnpkg.com/bara/-/bara-2.3.1.tgz#736a827ca5c3f9966a244face477f8d98f490788"
+  integrity sha512-oF9mY8D11JHy/AE+dISVZbX9Us+ueYz38plolLUOuKLT4loa52Ov5Gw4xqfncpMcF/amWyVLwNE3pCCT6A9Rdg==
+  dependencies:
+    "@bara/barn" "^2.3.1"
+    "@bara/basics" "^2.3.1"
+    "@bara/core" "^2.3.1"
 
 base64-js@^1.0.2, base64-js@^1.1.2, base64-js@^1.2.3:
   version "1.3.0"
