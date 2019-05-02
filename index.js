@@ -3,12 +3,12 @@
  */
 
 import { register } from 'bara'
-import { useReactApp, useTouchableOpacityStream } from 'bara-react'
+import { withBara } from 'bara-react'
+import { AppRegistry } from 'react-native'
 import App from './src/App'
 import { name as appName } from './app.json'
 import registerBaraFeatures from './src/bara'
 
-register(() => {
-  registerBaraFeatures()
-  useReactApp({ name: appName, isNative: true, App })
-})
+AppRegistry.registerComponent(appName, () =>
+  withBara(App, registerBaraFeatures),
+)

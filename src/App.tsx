@@ -27,18 +27,16 @@ interface Props {}
 export default class App extends Component<Props> {
   render() {
     return (
-      <BaraProvider>
-        <View style={styles.container}>
-          <Icon name="chevron-right" size={30} />
-          <Text style={styles.welcome}>Welcome to Bara React Native!</Text>
-          <Text style={styles.instructions}>To get started, edit App.tsx</Text>
-          <Text style={styles.instructions}>{instructions}</Text>
-          <TouchableOpacity name="bara-button">
-            <Text>Bara Button</Text>
-          </TouchableOpacity>
-          <Sidebar />
-        </View>
-      </BaraProvider>
+      <View style={styles.container}>
+        <Icon name="chevron-right" size={30} />
+        <Text style={styles.welcome}>Welcome to Bara React Native!</Text>
+        <Text style={styles.instructions}>To get started, edit App.tsx</Text>
+        <Text style={styles.instructions}>{instructions}</Text>
+        <TouchableOpacity name="bara-button">
+          <Text>Bara Button</Text>
+        </TouchableOpacity>
+        <Sidebar />
+      </View>
     )
   }
 }

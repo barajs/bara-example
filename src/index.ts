@@ -13,12 +13,19 @@
 import '@babel/polyfill'
 import 'react-app-polyfill/ie9'
 
-import { register } from 'bara'
-import { useReactApp } from 'bara-react'
+import { withBara } from 'bara-react'
+import { ComponentType } from 'react'
+import { AppRegistry } from 'react-native'
 import App from './App'
 import registerBaraFeatures from './bara'
 
-register(() => {
-  registerBaraFeatures()
-  useReactApp({ name: 'bara-demo', isNative: false, App })
-})
+const render = (AppComponent: ComponentType) => {
+  AppRegistry.registerComponent('bara-demo', () =>
+    withBara(AppComponent, registerBaraFeatures),
+  )
+  AppRegistry.runApplication('bara-demo', {
+    rootTag: document.getElementById('root'),
+  })
+}
+
+render(App)
