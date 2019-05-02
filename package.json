@@ -3,7 +3,11 @@
   "version": "0.0.1",
   "private": true,
   "main": "dist/index.js",
-  "homepage": "https://example.barajs.dev",
+  "author": {
+      "name": "BaraJS"
+  },
+  "description": "BaraJS Desktop Application",
+  "homepage": "./",
   "scripts": {
     "dev": "run-p start:web start:mobile start:desktop",
     "start:web": "craco start --verbose",
