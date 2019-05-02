@@ -1,61 +1,67 @@
 /**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * Generated with the TypeScript template
- * https://github.com/emin93/react-native-template-typescript
+ * Sample Bara React Native App
+ * https://github.com/barajs/bara-example
  *
  * @format
  */
 
-import { BaraProvider, TouchableOpacity } from 'bara-react'
-import React, { Component } from 'react'
-import { Platform, StyleSheet, Text, View } from 'react-native'
-
+import { Platform, Text, TouchableOpacity, View } from 'bara-react'
 import { Octicons as Icon } from 'bara-react-icons/es'
+import React, { Component } from 'react'
+import { StyleSheet } from 'react-native'
 
-import { Sidebar } from './features/sidebar'
+import { GlobalStyles } from './features/global-styles'
+import { SideBarScreen } from './features/sidebar'
 
 const instructions = Platform.select({
-  ios: 'Press Cmd+R to reload,\n' + 'Cmd+D or shake for dev menu',
+  ios: '[iOS] Press Cmd+R to reload,\n' + 'Cmd+D or shake for dev menu',
   android:
-    'Double tap R on your keyboard to reload,\n' +
+    '[Android] Double tap R on your keyboard to reload,\n' +
     'Shake or press menu button for dev menu',
 })
 
 interface Props {}
-export default class App extends Component<Props> {
-  render() {
-    return (
+const App = () => {
+  return (
+    <>
+      <GlobalStyles />
       <View style={styles.container}>
-        <Icon name="chevron-right" size={30} />
-        <Text style={styles.welcome}>Welcome to Bara React Native!</Text>
-        <Text style={styles.instructions}>To get started, edit App.tsx</Text>
-        <Text style={styles.instructions}>{instructions}</Text>
-        <TouchableOpacity name="bara-button">
-          <Text>Bara Button</Text>
-        </TouchableOpacity>
-        <Sidebar />
+        <SideBarScreen>
+          <Text style={styles.welcome}>Welcome to Bara React Native!</Text>
+          <Text style={styles.instructions}>To get started, edit App.tsx</Text>
+          <Text style={styles.instructions}>{instructions}</Text>
+          <TouchableOpacity style={styles.welcomeButton} name="bara-button">
+            <Text>Say Welcome!</Text>
+          </TouchableOpacity>
+        </SideBarScreen>
       </View>
-    )
-  }
+    </>
+  )
 }
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
+    width: '100%',
+    height: '100%',
   },
   welcome: {
     fontSize: 20,
     textAlign: 'center',
-    margin: 10,
+    color: '#f0f',
+    margin: 15,
+  },
+  welcomeButton: {
+    borderRadius: 5,
+    backgroundColor: '#f0f',
+    margin: 20,
+    padding: 15,
+    alignSelf: 'center',
   },
   instructions: {
     textAlign: 'center',
-    color: '#333333',
+    color: '#fff',
     marginBottom: 5,
   },
 })
+
+export default App

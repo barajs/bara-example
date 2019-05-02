@@ -2344,6 +2344,18 @@ bara-react-icons@1.1.0:
     bara-react "2.0.1"
     react-native-vector-icons "6.4.2"
 
+bara-react-yofi@1.1.2:
+  version "1.1.2"
+  resolved "https://registry.yarnpkg.com/bara-react-yofi/-/bara-react-yofi-1.1.2.tgz#3d8abd1191ba3b1c1add965fcdc12161b647047a"
+  integrity sha512-kuwmcSIvHBz/EGyTHjIOdzyCOhuNNDaMRkUyprhLDqEdwJrIDrYNfN9s13plf07X2NsDjvCyzl6pgmlNNZsvOw==
+  dependencies:
+    bara "2.4.0"
+    bara-react "3.1.0"
+    bara-react-icons "1.1.0"
+    react "^16.8.6"
+    react-dom "^16.8.6"
+    react-native-web "0.11.2"
+
 bara-react@2.0.1:
   version "2.0.1"
   resolved "https://registry.yarnpkg.com/bara-react/-/bara-react-2.0.1.tgz#97f2664001c41138da1e29a2c174223984944a2a"
@@ -10367,7 +10379,7 @@ react-devtools-core@^3.6.0:
     shell-quote "^1.6.1"
     ws "^3.3.1"
 
-react-dom@16.8.6:
+react-dom@16.8.6, react-dom@^16.8.6:
   version "16.8.6"
   resolved "https://registry.yarnpkg.com/react-dom/-/react-dom-16.8.6.tgz#71d6303f631e8b0097f56165ef608f051ff6e10f"
   integrity sha512-1nL7PIq9LTL3fthPqwkvr2zY7phIPjYrT0jp4HjyEQrEROnw4dG41VVwi/wfoCneoleqrNX7iAD+pXebJZwrwA==
@@ -10553,7 +10565,7 @@ react-transform-hmr@^1.0.4:
     global "^4.3.0"
     react-proxy "^1.1.7"
 
-react@16.8.6:
+react@16.8.6, react@^16.8.6:
   version "16.8.6"
   resolved "https://registry.yarnpkg.com/react/-/react-16.8.6.tgz#ad6c3a9614fd3a4e9ef51117f54d888da01f2bbe"
   integrity sha512-pC0uMkhLaHm11ZSJULfOBqV4tIZkx87ZLvbbQYunNixAAvjnC+snJCg0XQXn9VIsttVsbZP/H/ewzgsd5fxKXw==

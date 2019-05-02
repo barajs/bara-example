@@ -1,19 +1,48 @@
-import { Text } from 'bara-react'
-import React from 'react'
-import { StyleSheet, View } from 'react-native'
+import { View } from 'bara-react'
+import {
+  SideBar,
+  SideBarContent,
+  SideBarItem,
+  SideBarLayout,
+  SideBarSeparator,
+  SideBarSpace,
+} from 'bara-react-yofi'
+import React, { ReactNode } from 'react'
 
-const styles = StyleSheet.create({
-  sidebar: {
-    flex: 1,
-    width: 48,
-    backgroundColor: '#222',
-  },
-})
+export interface SideBarProps {
+  children?: ReactNode
+}
 
-export const Sidebar = () => {
+export const SideBarScreen = ({ children }: SideBarProps) => {
+  const horizontal = true
   return (
-    <View style={styles.sidebar}>
-      <Text>Sidebar</Text>
+    <View style={{ width: '100%', height: '100%' }}>
+      <SideBarLayout
+        horizontal={horizontal}
+        horizontalSide="bottom"
+        verticalSide="right"
+      >
+        <SideBar name="sidebar-demo" horizontal={horizontal}>
+          <SideBarItem name="home" iconMaterial="home" label="Home" />
+          <SideBarSeparator horizontal={horizontal} />
+          <SideBarItem
+            name="light-bulb"
+            iconOcticon="light-bulb"
+            label="Light"
+          />
+          <SideBarSpace />
+          <SideBarSeparator horizontal={horizontal} />
+          <SideBarItem name="plus" iconOcticon="plus" label="Add" />
+          <SideBarItem
+            name="settings"
+            iconMaterial="settings"
+            label="Settings"
+          />
+        </SideBar>
+        <SideBarContent style={{ backgroundColor: '#fff' }}>
+          {children}
+        </SideBarContent>
+      </SideBarLayout>
     </View>
   )
 }
