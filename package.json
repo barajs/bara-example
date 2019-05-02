@@ -22,7 +22,9 @@
     "test": "jest",
     "clean": "shx rm -rf release dist build",
     "format": "prettier --write '{.,src,desktop/**}/*.{js,jsx,ts,tsx}'",
-    "lint": "tslint -p ."
+    "lint": "tslint -p .",
+    "studio": "open -a /Applications/Android\\ Studio.app ./android/",
+    "xcode": "open ios/bara_demo.xcodeproj"
   },
   "dependencies": {
     "bara": "2.4.0",
