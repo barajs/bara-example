@@ -13,11 +13,12 @@ import { StyleSheet } from 'react-native'
 import { GlobalStyles } from './features/global-styles'
 import { SideBarScreen } from './features/sidebar'
 
-const instructions = Platform.select({
+const instructions = Platform.selectUsingRealOS({
   ios: '[iOS] Press Cmd+R to reload,\n' + 'Cmd+D or shake for dev menu',
   android:
     '[Android] Double tap R on your keyboard to reload,\n' +
     'Shake or press menu button for dev menu',
+  web: '[Web] Cmd+R or F5 to reload webpage when nothing update',
 })
 
 interface Props {}
