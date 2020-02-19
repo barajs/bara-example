@@ -40,7 +40,7 @@
     "jsonfile": "5.0.0",
     "mkdirp": "0.5.1",
     "react": "16.8.6",
-    "react-app-polyfill": "0.2.2",
+    "react-app-polyfill": "1.0.6",
     "react-dom": "16.8.6",
     "react-native": "0.59.4",
     "react-native-vector-icons": "6.4.2"
