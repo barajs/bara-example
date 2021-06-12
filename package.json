@@ -34,7 +34,7 @@
     "bara": "2.4.0",
     "bara-react": "3.1.0",
     "bara-react-icons": "1.1.0",
-    "bara-react-yofi": "1.1.2",
+    "bara-react-yofi": "1.3.58",
     "electron-store": "3.2.0",
     "electron-updater": "4.0.6",
     "jsonfile": "5.0.0",
