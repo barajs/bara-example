@@ -42,7 +42,7 @@
     "react": "16.8.6",
     "react-app-polyfill": "0.2.2",
     "react-dom": "16.8.6",
-    "react-native": "0.59.4",
+    "react-native": "0.74.5",
     "react-native-vector-icons": "6.4.2"
   },
   "devDependencies": {
@@ -58,7 +58,7 @@
     "@types/mkdirp": "0.5.2",
     "@types/node": "11.13.4",
     "@types/react": "16.8.13",
-    "@types/react-native": "0.57.45",
+    "@types/react-native": "0.73.0",
     "@types/react-native-vector-icons": "6.4.0",
     "@types/react-test-renderer": "16.8.1",
     "babel-plugin-react-native-web": "0.11.2",
