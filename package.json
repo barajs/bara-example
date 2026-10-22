@@ -36,7 +36,7 @@
     "bara-react-icons": "1.1.0",
     "bara-react-yofi": "1.1.2",
     "electron-store": "3.2.0",
-    "electron-updater": "4.0.6",
+    "electron-updater": "6.3.0",
     "jsonfile": "5.0.0",
     "mkdirp": "0.5.1",
     "react": "16.8.6",
